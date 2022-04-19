@@ -10,18 +10,22 @@ public final class Xcodebuild {
   let arch: [String]?
   let sdk: String?
 
+  let showBuildTimingSummary: Bool
+
   public init(workspace: String? = nil,
-       scheme: String? = nil,
-       destination: DestinationSpecifier? = nil,
-       configuraton: String? = nil,
-       arch: [String]? = nil,
-       sdk: String? = nil) {
+              scheme: String? = nil,
+              destination: DestinationSpecifier? = nil,
+              configuraton: String? = nil,
+              arch: [String]? = nil,
+              sdk: String? = nil,
+              showBuildTimingSummary: Bool = false) {
     self.workspace = workspace
     self.scheme = scheme
     self.destination = destination
     self.configuraton = configuraton
     self.arch = arch
     self.sdk = sdk
+    self.showBuildTimingSummary = showBuildTimingSummary
   }
 
   func serializedCommand(action: String) -> String {
@@ -43,6 +47,10 @@ public final class Xcodebuild {
       for arch in arch {
         buffer.append(" -arch \(arch)")
       }
+    }
+
+    if showBuildTimingSummary {
+      buffer.append(" -showBuildTimingSummary")
     }
 
     buffer.append(" \(action)")
