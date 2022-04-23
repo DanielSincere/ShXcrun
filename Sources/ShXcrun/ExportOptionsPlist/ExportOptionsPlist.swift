@@ -10,7 +10,7 @@ public struct ExportOptionsPlist: Codable {
   public let destination: String?
 
   /// Reformat archive to focus on eligible target bundle identifier.
-  public let distributionBundleIdentifier: String
+  public let distributionBundleIdentifier: String?
 
   /// For non-App Store exports, if the app uses On Demand Resources and this is YES, asset packs are embedded in the app bundle so that the app can be tested without a server to host asset packs. Defaults to YES unless onDemandResourcesAssetPacksBaseURL is specified.
   public let embedOnDemandResourcesAssetPacksInBundle: Bool?
@@ -81,7 +81,7 @@ public struct ExportOptionsPlist: Codable {
 
   public init(compileBitcode: Bool? = nil,
               destination: String? = nil,
-              distributionBundleIdentifier: String,
+              distributionBundleIdentifier: String? = nil,
               embedOnDemandResourcesAssetPacksInBundle: Bool? = nil,
               generateAppStoreInformation: Bool? = nil,
               iCloudContainerEnvironment: String? = nil,
