@@ -1,6 +1,6 @@
 import Foundation
 
-extension DestinationSpecifier {
+extension Xcodebuild.DestinationSpecifier {
   public init(string: String) throws {
     var _platform: Platform? = nil
     var _os: String? = nil
