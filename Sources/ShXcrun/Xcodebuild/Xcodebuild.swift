@@ -5,7 +5,7 @@ public final class Xcodebuild {
 
   let workspace: String?
   let scheme: String?
-  let destination: DestinationSpecifier?
+  let destination: Destination?
   let configuraton: String?
   let arch: [String]?
   let sdk: String?
@@ -26,7 +26,7 @@ public final class Xcodebuild {
 
   public init(workspace: String? = nil,
               scheme: String? = nil,
-              destination: DestinationSpecifier? = nil,
+              destination: Destination? = nil,
               configuraton: String? = nil,
               arch: [String]? = nil,
               sdk: String? = nil,

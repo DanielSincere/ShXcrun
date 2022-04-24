@@ -1,6 +1,6 @@
 import Foundation
 extension Xcodebuild {
-  public struct DestinationSpecifier: CustomStringConvertible, RawRepresentable {
+  public struct Destination: CustomStringConvertible, RawRepresentable {
     
     public let platform: Platform
     public let os: String?

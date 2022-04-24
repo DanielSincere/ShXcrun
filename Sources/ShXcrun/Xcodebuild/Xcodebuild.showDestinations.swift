@@ -4,15 +4,15 @@ import Foundation
 extension Xcodebuild {
 
   /// Show available build destinations
-  public func showDestinations() throws -> [DestinationSpecifier]{
+  public func showDestinations() throws -> [Destination]{
     try showDestinations(all: false).available
   }
 
-  public func showAllDestinations() throws -> (available: [DestinationSpecifier], ineligible: [DestinationSpecifier]) {
+  public func showAllDestinations() throws -> (available: [Destination], ineligible: [Destination]) {
     try showDestinations(all: true)
   }
 
-  private func showDestinations(all: Bool) throws -> (available: [DestinationSpecifier], ineligible: [DestinationSpecifier]) {
+  private func showDestinations(all: Bool) throws -> (available: [Destination], ineligible: [Destination]) {
 
     let output = try Process(cmd: serializedCommand(action: "-showdestinations"))
       .runReturningAllOutput()
@@ -32,8 +32,8 @@ extension Xcodebuild {
 
     let lines = allLines.drop { !$0.hasPrefix("Available destinations") && !$0.hasPrefix("Ineligible destinations")  }
 
-    var availableDestinations: [DestinationSpecifier] = []
-    var ineligibleDestinations: [DestinationSpecifier] = []
+    var availableDestinations: [Destination] = []
+    var ineligibleDestinations: [Destination] = []
 
     var hasReachedIneligibleSection = false
 
@@ -51,7 +51,7 @@ extension Xcodebuild {
         }
       }
 
-      DestinationSpecifier(rawValue: line).map {
+      Destination(rawValue: line).map {
         hasReachedIneligibleSection
         ? ineligibleDestinations.append($0)
         : availableDestinations.append($0)

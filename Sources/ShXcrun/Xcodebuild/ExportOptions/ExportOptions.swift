@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ExportOptionsPlist: Codable {
+public struct ExportOptions: Codable {
 
   /// For non-App Store exports, should Xcode re-compile
   /// the app from bitcode? Defaults to YES.
