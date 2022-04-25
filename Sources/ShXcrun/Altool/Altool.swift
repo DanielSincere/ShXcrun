@@ -6,7 +6,7 @@ public final class Altool {
     self.credential = credential
   }
   
-  func serialized(command: String) -> String {
-    "xcrun altool \(credential.serialized) \(command)"
+  func stem() -> String {
+    "xcrun altool \(credential.serialized)"
   }
 }

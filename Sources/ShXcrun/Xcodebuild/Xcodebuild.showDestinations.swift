@@ -4,7 +4,7 @@ import Foundation
 extension Xcodebuild {
 
   /// Show available build destinations
-  public func showDestinations() throws -> [Destination]{
+  public func showDestinations() throws -> [Destination] {
     try showDestinations(all: false).available
   }
 
@@ -18,7 +18,6 @@ extension Xcodebuild {
       .runReturningAllOutput()
 
     if let terminationError = output.terminationError {
-
       if let showDestinationsError = ShowDestinationsRequiresWorkspaceAndSchemeError(stdErr: output.stdErr) {
         throw showDestinationsError
       } else {
@@ -27,7 +26,7 @@ extension Xcodebuild {
     }
 
     guard let allLines = output.stdOut?.asTrimmedString()?.asTrimmedLines() else {
-      throw Sh.Errors.unexpectedNilDataError
+      throw UnexpectedMissingData()
     }
 
     let lines = allLines.drop { !$0.hasPrefix("Available destinations") && !$0.hasPrefix("Ineligible destinations")  }
@@ -61,6 +60,8 @@ extension Xcodebuild {
     return (availableDestinations, ineligibleDestinations)
   }
 
+  struct UnexpectedMissingData: Error {}
+  
   struct ShowDestinationsRequiresWorkspaceAndSchemeError: Error, LocalizedError, CustomStringConvertible {
     init?(stdErr: Data?) {
       guard let trimmedString = stdErr?.asTrimmedString(), trimmedString.hasSuffix("-showdestinations requires a workspace and scheme.") else {

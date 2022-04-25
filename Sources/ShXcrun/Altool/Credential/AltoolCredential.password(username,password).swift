@@ -10,6 +10,10 @@ public struct LiteralPasswordCredential: AltoolCredential {
   let password: String
   
   public var serialized: String {
-    "-u \(username) -p \(password)"
+    "-u \(username) -p @env:SH_XCRUN_ALTOOL_PASSWORD"
+  }
+  
+  public var environment: [String : String] {
+    ["SH_XCRUN_ALTOOL_PASSWORD": password]
   }
 }
