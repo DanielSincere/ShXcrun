@@ -84,6 +84,10 @@ public final class Xcodebuild {
         buffer.append(" -arch \(arch)")
       }
     }
+    
+    if let sdk = sdk {
+      buffer.append(" -sdk \(sdk)")
+    }
 
     if showBuildTimingSummary {
       buffer.append(" -showBuildTimingSummary")
