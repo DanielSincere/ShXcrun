@@ -3,6 +3,7 @@ import Foundation
 
 public final class Xcodebuild {
 
+  let project: String?
   let workspace: String?
   let scheme: String?
   let destination: Destination?
@@ -24,7 +25,8 @@ public final class Xcodebuild {
   let authenticationKeyID: String?
   let authenticationKeyIssuerID: String?
 
-  public init(workspace: String? = nil,
+  public init(project: String? = nil,
+              workspace: String? = nil,
               scheme: String? = nil,
               destination: Destination? = nil,
               configuraton: String? = nil,
@@ -43,6 +45,7 @@ public final class Xcodebuild {
               authenticationKeyPath: String? = nil,
               authenticationKeyID: String? = nil,
               authenticationKeyIssuerID: String? = nil) {
+    self.project = project
     self.workspace = workspace
     self.scheme = scheme
     self.destination = destination
@@ -67,6 +70,10 @@ public final class Xcodebuild {
   func serializedCommand(action: String) -> String {
     var buffer = "xcrun xcodebuild"
 
+    if let project = project {
+      buffer.append(" -project \(project)")
+    }
+
     if let workspace = workspace {
       buffer.append(" -workspace \(workspace)")
     }
@@ -84,7 +91,7 @@ public final class Xcodebuild {
         buffer.append(" -arch \(arch)")
       }
     }
-    
+
     if let sdk = sdk {
       buffer.append(" -sdk \(sdk)")
     }

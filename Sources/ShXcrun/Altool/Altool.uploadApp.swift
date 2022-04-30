@@ -2,7 +2,7 @@ import Sh
 import Foundation
 
 extension Altool {
-    
+
   public func uploadApp(_ sink: Sink = .terminal, file: String, platform: Platform, transport: [Transport]? = nil) throws {
     let command =
     """
@@ -13,8 +13,9 @@ extension Altool {
     -t \(platform) \
     \(transport.serialized)
     """
-    
-    try sh(sink, command,
+
+    try sh(sink,
+           command,
            environment: self.credential.environment)
   }
 }
