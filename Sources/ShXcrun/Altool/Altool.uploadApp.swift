@@ -8,7 +8,7 @@ extension Altool {
     let cred = credential.serialized
     let trans = transport.serialized
     try sh(sink,
-           "xcrun altool \(cred) -upload-app -f \(file) -t \(platform) \(trans)",
+           "xcrun altool \(cred) --upload-app -f \(file) -t \(platform) \(trans)",
            environment: self.credential.environment)
   }
 }
