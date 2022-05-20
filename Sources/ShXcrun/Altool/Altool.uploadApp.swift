@@ -4,18 +4,11 @@ import Foundation
 extension Altool {
 
   public func uploadApp(_ sink: Sink = .terminal, file: String, platform: Platform, transport: [Transport]? = nil) throws {
-    let command =
-    """
-    xcrun altool \
-    \(credential.serialized) \
-    --upload-app \
-    -f \(file) \
-    -t \(platform) \
-    \(transport.serialized)
-    """
-
+    
+    let cred = credential.serialized
+    let trans = transport.serialized
     try sh(sink,
-           command,
+           "xcrun altool \(cred) -upload-app -f \(file) -t \(platform) \(trans)",
            environment: self.credential.environment)
   }
 }

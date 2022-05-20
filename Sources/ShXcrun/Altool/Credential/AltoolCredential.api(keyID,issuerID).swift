@@ -10,6 +10,13 @@ public struct ApiKeyCredential: AltoolCredential {
   let apiIssuerID: String
 
   public var serialized: String {
-    "--apiKey \(apiKeyID) --apiIssuer \(apiIssuerID)"
+    "--apiKey $SH_XCRUN_ALTOOL_API_KEY_ID --apiIssuer $SH_XCRUN_ALTOOL_API_ISSUER_ID"
+  }
+  
+  public var environment: [String: String] {
+    [
+      "SH_XCRUN_ALTOOL_API_KEY_ID": apiKeyID,
+      "SH_XCRUN_ALTOOL_API_ISSUER_ID": apiIssuerID,
+    ]
   }
 }

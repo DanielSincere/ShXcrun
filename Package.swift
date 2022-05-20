@@ -21,6 +21,6 @@ let package = Package(
             dependencies: ["Sh"]),
         .testTarget(
             name: "ShXcrunTests",
-            dependencies: ["ShXcrun"]),
+            dependencies: ["ShXcrun", "Sh"]),
     ]
 )
