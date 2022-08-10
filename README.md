@@ -2,6 +2,8 @@
 
 A wrapper around `xcodebuild`, `agvtool`, and other `xcrun` tools, built on top of [Sh](https://github.com/FullQueueDeveloper/Sh.git).
 
+For a full example app, please see https://github.com/FullQueueDeveloper/SwishExampleiOSProject
+
 
 ## Installation
 
