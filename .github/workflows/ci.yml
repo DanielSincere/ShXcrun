@@ -15,8 +15,6 @@ jobs:
         include:
           - os: macos-12
             swift: "5.7"
-          - os: ubuntu-latest
-            swift: "5.7"
     steps:
       - uses: fwal/setup-swift@v1
         with:
