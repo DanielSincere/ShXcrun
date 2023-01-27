@@ -20,51 +20,22 @@ extension SimCtl {
       case shutdown = "Shutdown"
     }
   }
-
-
   
   // Process.waitUntilExit never returns
   public static func listDevices() throws -> [DeviceType.Identifier: [Device]] {
-    let wrapper = try sh(Devices.self, "xcrun simctl list -j devices")
-    return wrapper.devices
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    let wrapper = try sh(Devices.self, decodedBy: decoder, "xcrun simctl list -j devices")
+    return wrapper.deviceTypeIdsToDevices
   }
   
   struct Devices: Codable {
-    @DictionaryWrapper 
-    var devices: [DeviceType.Identifier: [Device]]
-  }
-}
-
-@propertyWrapper
-public struct DictionaryWrapper<Key: Hashable & RawRepresentable, Value: Codable>: Codable where Key.RawValue: Codable & Hashable {
-  public var wrappedValue: [Key: Value]
-  
-  public init() {
-    wrappedValue = [:]
-  }
-  
-  public init(wrappedValue: [Key: Value]) {
-    self.wrappedValue = wrappedValue
-  }
-  
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.singleValueContainer()
-    let rawKeyedDictionary = try container.decode([Key.RawValue: Value].self)
+    let devices: [String: [SimCtl.Device]]
     
-    wrappedValue = [:]
-    for (rawKey, value) in rawKeyedDictionary {
-      guard let key = Key(rawValue: rawKey) else {
-        throw DecodingError.dataCorruptedError(
-          in: container,
-          debugDescription: "Invalid key: cannot initialize '\(Key.self)' from invalid '\(Key.RawValue.self)' value '\(rawKey)'")
+    var deviceTypeIdsToDevices: [SimCtl.DeviceType.Identifier: [SimCtl.Device]] {
+      devices.reduce(into: [:]) { result, next in
+        result[SimCtl.DeviceType.Identifier(stringLiteral: next.key)] = next.value
       }
-      wrappedValue[key] = value
     }
-  }
-  
-  public func encode(to encoder: Encoder) throws {
-    let rawKeyedDictionary = Dictionary(uniqueKeysWithValues: wrappedValue.map { ($0.rawValue, $1) })
-    var container = encoder.singleValueContainer()
-    try container.encode(rawKeyedDictionary)
   }
 }

@@ -40,11 +40,17 @@ final class SimCtlTests: XCTestCase {
     
     struct Devices: Codable {
       //SimCtl.DeviceType.Identifier
-      @DictionaryWrapper 
-      var devices: [SimCtl.DeviceType.Identifier: [SimCtl.Device]]
+      
+      let devices: [String: [SimCtl.Device]]
+      
+      var deviceTypeIdsToDevices: [SimCtl.DeviceType.Identifier: [SimCtl.Device]] {
+        devices.reduce(into: [:]) { result, next in
+          result[SimCtl.DeviceType.Identifier(stringLiteral: next.key)] = next.value
+        }
+      }
     }
     let devices = try decoder.decode(Devices.self, from: devicesOutput.data(using: .utf8)!)
-    XCTAssertEqual(devices.devices.count, 9)
+    XCTAssertEqual(devices.deviceTypeIdsToDevices.count, 9)
   }
   
   
