@@ -12,7 +12,7 @@ extension SimCtl {
     public let udid: UUID
     public let isAvailable: Bool
 
-    public let deviceTypeIdentifier:DeviceType.Identifier
+    public let deviceTypeIdentifier: DeviceType.Identifier
     public let state: State
     public let name: String
     

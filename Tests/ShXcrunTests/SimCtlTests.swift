@@ -7,8 +7,9 @@ final class SimCtlTests: XCTestCase {
     XCTAssertNoThrow(try SimCtl.listDeviceTypes())
   }
   
-  func testListDevices() {
-    XCTAssertNoThrow(try SimCtl.listDevices())
+  func testListDevices() async throws {
+    let devices = try await SimCtl.listDevices()
+    XCTAssertEqual(devices.count, 3)
   }
   
   func testDeviceParsing() throws {
