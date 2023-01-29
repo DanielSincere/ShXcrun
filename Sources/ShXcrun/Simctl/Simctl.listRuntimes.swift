@@ -3,18 +3,21 @@ import Sh
 extension Simctl {
 
   public struct Runtime: Decodable {
-//    "bundlePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Library\/Developer\/CoreSimulator\/Profiles\/Runtimes\/iOS.simruntime",
-//    "buildversion" : "20B72",
-//    "platform" : "iOS",
-//    "runtimeRoot" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Library\/Developer\/CoreSimulator\/Profiles\/Runtimes\/iOS.simruntime\/Contents\/Resources\/RuntimeRoot",
-//    "identifier" : "com.apple.CoreSimulator.SimRuntime.iOS-16-1",
-//    "version" : "16.1",
-//    "isInternal" : false,
-//    "isAvailable" : true,
-//    "name" : "iOS 16.1",
+    public let bundlePath: String
+    public let buildversion: String
+    public let platform: String
+    public let runtimeRoot: String
+    public let identifier: String
+    public let version: String
+    public let isInternal: Bool
+    public let isAvailable: Bool
+    public let name: String
   }
-  public static func listRuntimes() -> [Runtime] {
-   []
+  
+  public static func listRuntimes() throws -> [Runtime] {
+    let cmd = "xcrun simctl list -j runtimes"
+    let runtimes = try sh(Runtimes.self, cmd)
+    return runtimes.runtimes
   }
   
   struct Runtimes: Decodable {

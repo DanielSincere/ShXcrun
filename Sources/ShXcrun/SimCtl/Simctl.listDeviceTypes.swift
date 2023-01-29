@@ -1,6 +1,12 @@
 import Sh
 
 extension Simctl {
+
+  public static func listDeviceTypes() throws -> [DeviceType] {
+    let cmd = "xcrun simctl list -j devicetypes"
+    let deviceTypes = try sh(DeviceTypes.self, cmd)
+    return deviceTypes.devicetypes
+  }
   
   public struct DeviceType: Decodable {
     public let productFamily: String
@@ -38,11 +44,7 @@ extension Simctl {
     }
   }
   
-  public static func listDeviceTypes() throws -> [DeviceType] {
-    struct Wrapper: Decodable {
-      let devicetypes: [DeviceType]
-    }
-    let wrapper = try sh(Wrapper.self, "xcrun simctl list -j devicetypes")
-    return wrapper.devicetypes
+  struct DeviceTypes: Decodable {
+    let devicetypes: [DeviceType]
   }
 }

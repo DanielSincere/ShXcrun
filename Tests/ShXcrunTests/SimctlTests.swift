@@ -6,6 +6,16 @@ final class SimctlTests: XCTestCase {
   func testListDeviceTypes() {
     XCTAssertNoThrow(try Simctl.listDeviceTypes())
   }
+  
+  func testListDevices() throws {
+    let devices = try Simctl.listDevices()
+    XCTAssertGreaterThan(devices.count, 0)
+  }
+  
+  func testListRuntimes() throws {
+    let runtimes = try Simctl.listRuntimes()
+    XCTAssertGreaterThan(runtimes.count, 0)
+  }
     
   func testDeviceParsing() throws {
     
@@ -37,6 +47,7 @@ final class SimctlTests: XCTestCase {
     let devices = try decoder.decode(Simctl.Devices.self, from: devicesOutput.data(using: .utf8)!)
     XCTAssertGreaterThan(devices.deviceTypeIdsToDevices.count, 0)
   }
+
 }
 
 private let devicesOutput: String = #"""
