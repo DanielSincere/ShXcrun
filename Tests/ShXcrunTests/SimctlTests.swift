@@ -26,7 +26,7 @@ final class SimctlTests: XCTestCase {
     """#
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .iso8601
-    let device = try decoder.decode(SimCtl.Device.self, from: sample.data(using: .utf8)!)
+    let device = try decoder.decode(Simctl.Device.self, from: sample.data(using: .utf8)!)
     XCTAssertEqual(device.name, "iPhone X 15.5")
   }
   
@@ -34,7 +34,7 @@ final class SimctlTests: XCTestCase {
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .iso8601
     
-    let devices = try decoder.decode(SimCtl.Devices.self, from: devicesOutput.data(using: .utf8)!)
+    let devices = try decoder.decode(Simctl.Devices.self, from: devicesOutput.data(using: .utf8)!)
     XCTAssertGreaterThan(devices.deviceTypeIdsToDevices.count, 0)
   }
 }

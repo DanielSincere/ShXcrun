@@ -30,11 +30,11 @@ extension Simctl {
   }
   
   struct Devices: Codable {
-    let devices: [String: [SimCtl.Device]]
+    let devices: [String: [Simctl.Device]]
     
-    var deviceTypeIdsToDevices: [SimCtl.DeviceType.Identifier: [SimCtl.Device]] {
+    var deviceTypeIdsToDevices: [Simctl.DeviceType.Identifier: [Simctl.Device]] {
       devices.reduce(into: [:]) { result, next in
-        result[SimCtl.DeviceType.Identifier(stringLiteral: next.key)] = next.value
+        result[Simctl.DeviceType.Identifier(stringLiteral: next.key)] = next.value
       }
     }
   }
