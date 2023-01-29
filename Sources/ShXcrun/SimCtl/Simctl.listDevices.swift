@@ -1,7 +1,7 @@
 import Sh
 import Foundation
 
-extension SimCtl {
+extension Simctl {
   public struct Device: Codable {
     public let lastBootedAt: Date?
     public let availabilityError: String?

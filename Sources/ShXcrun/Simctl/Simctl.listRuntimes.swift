@@ -1,6 +1,6 @@
 import Sh
 
-extension SimCtl {
+extension Simctl {
 
   public struct Runtime: Decodable {
 //    "bundlePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Library\/Developer\/CoreSimulator\/Profiles\/Runtimes\/iOS.simruntime",

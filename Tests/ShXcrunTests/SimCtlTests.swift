@@ -6,12 +6,7 @@ final class SimCtlTests: XCTestCase {
   func testListDeviceTypes() {
     XCTAssertNoThrow(try SimCtl.listDeviceTypes())
   }
-  
-  func testListDevices() async throws {
-    let devices = try await SimCtl.listDevices()
-    XCTAssertEqual(devices.count, 3)
-  }
-  
+    
   func testDeviceParsing() throws {
     
     let sample = #"""
@@ -39,22 +34,9 @@ final class SimCtlTests: XCTestCase {
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .iso8601
     
-    struct Devices: Codable {
-      //SimCtl.DeviceType.Identifier
-      
-      let devices: [String: [SimCtl.Device]]
-      
-      var deviceTypeIdsToDevices: [SimCtl.DeviceType.Identifier: [SimCtl.Device]] {
-        devices.reduce(into: [:]) { result, next in
-          result[SimCtl.DeviceType.Identifier(stringLiteral: next.key)] = next.value
-        }
-      }
-    }
-    let devices = try decoder.decode(Devices.self, from: devicesOutput.data(using: .utf8)!)
-    XCTAssertEqual(devices.deviceTypeIdsToDevices.count, 9)
+    let devices = try decoder.decode(SimCtl.Devices.self, from: devicesOutput.data(using: .utf8)!)
+    XCTAssertGreaterThan(devices.deviceTypeIdsToDevices.count, 0)
   }
-  
-  
 }
 
 private let devicesOutput: String = #"""

@@ -1,6 +1,6 @@
 import Foundation
 
-public class SimCtl {
+public class Simctl {
 
 
 

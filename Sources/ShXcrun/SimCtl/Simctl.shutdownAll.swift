@@ -1,6 +1,6 @@
 import Sh
 
-extension SimCtl {
+extension Simctl {
   /**
    Shutdown all running devices
    */

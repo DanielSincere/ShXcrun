@@ -1,6 +1,6 @@
 import Sh
 
-extension SimCtl {
+extension Simctl {
   
   public struct DeviceType: Decodable {
     public let productFamily: String

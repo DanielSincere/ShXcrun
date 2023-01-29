@@ -3,24 +3,24 @@
 import PackageDescription
 
 let package = Package(
-    name: "ShXcrun",
-    platforms: [
-        .macOS(.v12)
-    ],
-    products: [
-        .library(
-            name: "ShXcrun",
-            targets: ["ShXcrun"]),
-    ],
-    dependencies: [
-        .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.1.0"),
-    ],
-    targets: [
-        .target(
-            name: "ShXcrun",
-            dependencies: ["Sh"]),
-        .testTarget(
-            name: "ShXcrunTests",
-            dependencies: ["ShXcrun", "Sh"]),
-    ]
+  name: "ShXcrun",
+  platforms: [
+    .macOS(.v12)
+  ],
+  products: [
+    .library(
+      name: "ShXcrun",
+      targets: ["ShXcrun"]),
+  ],
+  dependencies: [
+    .package(url: "https://github.com/FullQueueDeveloper/Sh.git", branch: "bugfix/deadlock"),
+  ],
+  targets: [
+    .target(
+      name: "ShXcrun",
+      dependencies: ["Sh"]),
+    .testTarget(
+      name: "ShXcrunTests",
+      dependencies: ["ShXcrun", "Sh"]),
+  ]
 )
