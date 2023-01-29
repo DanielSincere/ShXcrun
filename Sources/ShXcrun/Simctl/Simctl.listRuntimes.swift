@@ -2,6 +2,12 @@ import Sh
 
 extension Simctl {
 
+  public static func listRuntimes() throws -> [Runtime] {
+    let cmd = "xcrun simctl list -j runtimes"
+    let runtimes = try sh(Runtimes.self, cmd)
+    return runtimes.runtimes
+  }
+  
   public struct Runtime: Decodable {
     public let bundlePath: String
     public let buildversion: String
@@ -12,12 +18,6 @@ extension Simctl {
     public let isInternal: Bool
     public let isAvailable: Bool
     public let name: String
-  }
-  
-  public static func listRuntimes() throws -> [Runtime] {
-    let cmd = "xcrun simctl list -j runtimes"
-    let runtimes = try sh(Runtimes.self, cmd)
-    return runtimes.runtimes
   }
   
   struct Runtimes: Decodable {

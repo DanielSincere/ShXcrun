@@ -2,6 +2,16 @@ import Sh
 import Foundation
 
 extension Simctl {
+  public static func listDevices() throws -> [DeviceType.Identifier: [Device]] {
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    
+    let devices = try sh(Devices.self,
+                         decodedBy: decoder,
+                         "xcrun simctl list -j devices")
+    return devices.deviceTypeIdsToDevices
+  }
+  
   public struct Device: Codable {
     public let lastBootedAt: Date?
     public let availabilityError: String?
@@ -19,14 +29,6 @@ extension Simctl {
     public enum State: String, Codable {
       case shutdown = "Shutdown"
     }
-  }
-  
-  // Process.waitUntilExit never returns
-  public static func listDevices() throws -> [DeviceType.Identifier: [Device]] {
-    let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = .iso8601
-    let wrapper = try sh(Devices.self, decodedBy: decoder, "xcrun simctl list -j devices")
-    return wrapper.deviceTypeIdsToDevices
   }
   
   struct Devices: Codable {
