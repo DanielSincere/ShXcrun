@@ -3,8 +3,9 @@ import XCTest
 
 final class SimctlTests: XCTestCase {
   
-  func testListDeviceTypes() {
-    XCTAssertNoThrow(try Simctl.listDeviceTypes())
+  func testListDeviceTypes() throws {
+    let deviceTypes = try Simctl.listDeviceTypes()
+    XCTAssertGreaterThan(deviceTypes.count, 0)
   }
   
   func testListDevices() throws {

@@ -13,7 +13,7 @@ let package = Package(
       targets: ["ShXcrun"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/FullQueueDeveloper/Sh.git", branch: "bugfix/deadlock"),
+    .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.2.0-alpha"),
   ],
   targets: [
     .target(

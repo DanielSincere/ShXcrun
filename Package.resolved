@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/FullQueueDeveloper/Sh.git",
       "state" : {
-        "branch" : "bugfix/deadlock",
-        "revision" : "4d12a2e32be2fe9422d6dc3dd19c6dcd58b06742"
+        "revision" : "a3af8b4dd3e6d31b34ed6f70fb3ee1e94af53234",
+        "version" : "1.2.0-alpha"
       }
     }
   ],
