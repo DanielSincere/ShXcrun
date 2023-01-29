@@ -1,10 +1,10 @@
 import XCTest
 @testable import ShXcrun
 
-final class SimCtlTests: XCTestCase {
+final class SimctlTests: XCTestCase {
   
   func testListDeviceTypes() {
-    XCTAssertNoThrow(try SimCtl.listDeviceTypes())
+    XCTAssertNoThrow(try Simctl.listDeviceTypes())
   }
     
   func testDeviceParsing() throws {
