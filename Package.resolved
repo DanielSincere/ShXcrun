@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/FullQueueDeveloper/Sh.git",
       "state" : {
-        "revision" : "a3af8b4dd3e6d31b34ed6f70fb3ee1e94af53234",
-        "version" : "1.2.0-alpha"
+        "revision" : "a40bba19d8085761e051fa1f0d5937259fa2e17a",
+        "version" : "1.2.0"
       }
     }
   ],
