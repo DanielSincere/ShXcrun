@@ -25,7 +25,7 @@ extension Xcodebuild {
       }
     }
 
-    guard let allLines = output.stdOut?.asTrimmedString()?.asTrimmedLines() else {
+    guard let allLines = output.stdOut.asTrimmedString()?.asTrimmedLines() else {
       throw UnexpectedMissingData()
     }
 
