@@ -7,18 +7,15 @@ on:
 
 jobs:
   build:
-    name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
+    name: CI on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         include:
           - os: macos-12
-            swift: "5.7"
+
     steps:
-      - uses: fwal/setup-swift@v1
-        with:
-          swift-version: ${{ matrix.swift }}
       - run: swift --version
       - uses: actions/checkout@v3
 

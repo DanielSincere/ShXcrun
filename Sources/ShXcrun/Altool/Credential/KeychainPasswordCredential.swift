@@ -1,13 +1,12 @@
-extension AltoolCredential where Self == KeychainPasswordCredential {
-  public static func password(username: String? = nil, keychain: String) -> Self {
-    Self(username: username, keychain: keychain)
-  }
-}
-
 public struct KeychainPasswordCredential: AltoolCredential {
   
   let username: String?
   let keychain: String
+  
+  public init(username: String?, keychain: String) {
+    self.username = username
+    self.keychain = keychain
+  }
   
   public var serialized: String {
     "\(usernameIfPresent) -p @keychain:\(keychain)"
