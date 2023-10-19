@@ -1,11 +1,11 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.8
 
 import PackageDescription
 
 let package = Package(
   name: "ShXcrun",
   platforms: [
-    .macOS(.v12)
+    .macOS(.v13)
   ],
   products: [
     .library(
@@ -13,7 +13,7 @@ let package = Package(
       targets: ["ShXcrun"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.2.0"),
+    .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.3.0"),
   ],
   targets: [
     .target(
